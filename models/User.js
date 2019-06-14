@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 module.exports = {
     identity: 'users',
     primaryKey: 'id',
@@ -12,6 +14,11 @@ module.exports = {
         number: { type:'string', required: true },
         password: { type:'string', required: true },
         enabled: { type:'boolean', required: true },
+        roles: {
+            collection: 'roles',
+            via: 'user',
+            through: 'users_roles',
+        },
         createdAt: {
             type: 'ref',
             columnName: 'created_at',
@@ -22,5 +29,9 @@ module.exports = {
             columnName: 'updated_at',
             autoUpdatedAt: true,
         },
-    }
+    },
+
+    customToJSON: function() {
+        return _.omit(this, ['password'])
+      }
 };

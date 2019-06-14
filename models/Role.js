@@ -7,5 +7,10 @@ module.exports = {
             type: 'string',
             autoMigrations: { autoIncrement: true }
         },
+        users: {
+            collection: 'users',
+            via: 'role',
+            through: 'users_roles',
+        },
     }
 };

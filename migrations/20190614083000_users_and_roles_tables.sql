@@ -22,12 +22,22 @@ INSERT INTO `roles` (`name`) VALUES ('ROLE_ADMIN');
 INSERT INTO `roles` (`name`) VALUES ('ROLE_USER');
 
 CREATE TABLE `users_roles` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `user_id` INT(11) NOT NULL,
-  `role_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`user_id`,`role_name`),
-  KEY `fk_role_name` (`role_name`),
-  CONSTRAINT `fk_role_name` FOREIGN KEY (`role_name`) REFERENCES `roles` (`name`),
-  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-);
+  `role_name` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_users_to_users_roles_idx` (`user_id` ASC),
+  INDEX `fk_roles_to_users_roles_idx` (`role_name` ASC),
+  CONSTRAINT `fk_users_to_users_roles`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_roles_to_users_roles`
+    FOREIGN KEY (`role_name`)
+    REFERENCES `roles` (`name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
 
 INSERT INTO `users_roles` (`user_id`, `role_name`) VALUES (1, 'ROLE_ADMIN');

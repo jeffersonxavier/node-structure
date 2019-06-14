@@ -19,6 +19,7 @@ module.exports = () => {
     const waterline = new Waterline();
     waterline.registerModel(Waterline.Collection.extend(require('../models/Role')));
     waterline.registerModel(Waterline.Collection.extend(require('../models/User')));
+    waterline.registerModel(Waterline.Collection.extend(require('../models/UserRole')));
     
     return new Promise((resolve, reject) => {
         waterline.initialize(datastore, (err, models) => {
