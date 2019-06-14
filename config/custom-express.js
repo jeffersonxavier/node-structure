@@ -2,6 +2,7 @@ const express = require('express');
 const consign = require('consign');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const migrations = require('./migrations');
 
 module.exports = () => {
     const app = express();
@@ -11,11 +12,17 @@ module.exports = () => {
     app.use(cors());
 
     return new Promise(async (resolve, reject) => {
-        consign()
-            .include('services')
-            .then('controllers')
-            .into(app);
+        try {
+            await migrations();
+        
+            consign()
+                .include('services')
+                .then('controllers')
+                .into(app);
 
-        resolve(app);
+            resolve(app);
+        } catch (error) {
+            reject(error);
+        }
     });
 };
