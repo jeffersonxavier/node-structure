@@ -3,6 +3,7 @@ const consign = require('consign');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const migrations = require('./migrations');
+const database = require('./database');
 
 module.exports = () => {
     const app = express();
@@ -14,6 +15,9 @@ module.exports = () => {
     return new Promise(async (resolve, reject) => {
         try {
             await migrations();
+
+            // Database Models
+            app.set('models', await database());
         
             consign()
                 .include('services')

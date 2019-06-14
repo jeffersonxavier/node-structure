@@ -14,7 +14,9 @@
     "consign": "^0.1.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mysql": "^2.17.1"
+    "mysql": "^2.17.1",
+    "sails-mysql": "^1.0.1",
+    "waterline": "^0.13.6"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"

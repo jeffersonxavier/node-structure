@@ -74,6 +74,7 @@ module.exports = () => {
             console.log('\t- Finalize Migration');
         }
 
+        console.log('\nFinalize all migrations.\n');
         dbConn.end();
         resolve();
     });
