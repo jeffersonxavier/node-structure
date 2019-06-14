@@ -9,7 +9,7 @@ module.exports = (app) => {
         userService.findOne({ email: req.user }).then(user => {
             res.json(user);
         }).catch(error => {
-            res.json(error)
+            res.status(error.status ? error.status : 500).json({ message: error.message ? error.message : 'GENERAL' });
         });
     });
 };
