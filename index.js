@@ -1,5 +1,8 @@
-const app = require('express')();
+const application = require('./config/custom-express')();
 
-app.listen(3000, () => {
-    console.log('\n\nServer listen *:3000');
-});
+application.then(app => {
+    app.listen(3000, () => {
+        console.log('\n\nServer listen *:3000');
+    });
+}).catch(error => console.log('\n\nError in initialize server', error));
+
