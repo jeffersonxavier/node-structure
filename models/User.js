@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize) => {
     
@@ -13,7 +14,11 @@ module.exports = (sequelize) => {
         setterMethods: {
             number: function(value) {
                 return this.setDataValue('number', value.toString().replace(/\D+/g, ''));
-            }
+            },
+            password: function(value) {
+                const hash = bcrypt.hashSync(value, 10);
+                return this.setDataValue('password', hash);
+            },
         },
     });
 };
