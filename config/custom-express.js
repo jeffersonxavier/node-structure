@@ -15,21 +15,10 @@ module.exports = () => {
     return new Promise(async (resolve, reject) => {
         const sequelize = database();
         app.set('sequelize', sequelize);
-        app.set('models', models(sequelize));
-        const User = app.get('models').user;
 
-        sequelize.sync().then(() => {
-            console.log('\nFinish Migrations!');
-            User.create({
-                name: 'Fulano',
-                email: 'Fulan1a1a11',
-                number: '1213.11113.1111',
-                password: 'admin',
-            }).then(result => {
-                console.log('\n\nuser created...', result.get({ plain: true }));
-                
-            });
-
+        models(sequelize).then(registeredModels => {
+            app.set('models', registeredModels);
+            
             consign()
                 .include('services')
                 .then('controllers')

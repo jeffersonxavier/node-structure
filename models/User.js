@@ -9,6 +9,7 @@ module.exports = (sequelize) => {
         password: { type: Sequelize.STRING(100), allowNull: false },
         enabled: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
     }, {
+        underscored: true,
         setterMethods: {
             number: function(value) {
                 return this.setDataValue('number', value.toString().replace(/\D+/g, ''));
