@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Init Structure to Node Projects",
   "main": "index.js",
+  "repository": "https://github.com/jeffersonxavier/node-structure",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "Jefferson Xavier",
   "license": "ISC",
@@ -13,9 +14,8 @@
     "body-parser": "^1.19.0",
     "consign": "^0.1.6",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.19.1"
+    "express": "^4.17.1",
+    "mysql": "^2.17.1",
+    "sequelize": "^5.11.0"
   }
 }
