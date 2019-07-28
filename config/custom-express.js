@@ -26,16 +26,6 @@ module.exports = () => {
 
             // Authentication
             app.set('passport', auth(app, passport));
-
-            // const User = app.get('models').user;
-            // User.findOne({
-            //     where: { id: 1 },
-            //     attributes: { exclude: ['password'] },
-            //     include: [{ all: true }],
-            // }).then(result => {
-            //     const user = result.get({ plain: true });
-            //     console.log('\n\nBuscou pelo id...', user);
-            // });
             
             consign()
                 .include('services')
