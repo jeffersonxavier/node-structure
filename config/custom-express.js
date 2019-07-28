@@ -18,6 +18,16 @@ module.exports = () => {
 
         models(sequelize).then(registeredModels => {
             app.set('models', registeredModels);
+
+            const User = app.get('models').user;
+            User.findOne({
+                where: { id: 1 },
+                attributes: { exclude: ['password'] },
+                include: [{ all: true }],
+            }).then(result => {
+                const user = result.get({ plain: true });
+                console.log('\n\nBuscou pelo id...', user);
+            });
             
             consign()
                 .include('services')

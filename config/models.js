@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
                     password: 'admin',
                     enabled: true,
                 }
-            }).spread((user, created) => {
+            }).spread(user => {
                 Role.findOrCreate({ where: { name: 'ROLE_USER' } });
                 Role.findOrCreate({ where: { name: 'ROLE_ADMIN' } }).spread((role) => {
                     user.addRole(role);

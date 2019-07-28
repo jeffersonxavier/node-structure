@@ -11,13 +11,15 @@ module.exports = (sequelize) => {
         enabled: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
     }, {
         underscored: true,
+        hooks: {
+            beforeCreate: (user) => {
+                const hash = bcrypt.hashSync(user.password, 10);
+                user.password = hash;
+            },
+        },
         setterMethods: {
             number: function(value) {
                 return this.setDataValue('number', value.toString().replace(/\D+/g, ''));
-            },
-            password: function(value) {
-                const hash = bcrypt.hashSync(value, 10);
-                return this.setDataValue('password', hash);
             },
         },
     });
