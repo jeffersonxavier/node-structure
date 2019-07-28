@@ -4,7 +4,7 @@ exports.isAuthenticated = (passport) => {
             if (err || !result) {
                 res.status(401).json(err ? err : { errMessage: 'Invalid Token!' });
             } else {
-                req.user = result.email;
+                req.user = result.userId;
                 next();
             }
         })(req, res, next);

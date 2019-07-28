@@ -28,11 +28,16 @@ module.exports = (app, passport) => {
                     } else if (!valid) {
                         return done({ errMessage: 'Invalid Password!' });
                     } else {
+                        for (const role of user.roles) {
+                            delete role.users_roles;
+                        }
+
                         const maxDate = new Date();
                         maxDate.setDate(maxDate.getDate() + 1); // Token valid by 24 hours
-                        
+
                         const payload = {
-                            email: user.email,
+                            userId: user.id,
+                            roles: user.roles,
                             generatedAt: maxDate,
                         }
                         done(null, { token: jwt.sign(payload, jwtSecret) });

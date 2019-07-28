@@ -3,7 +3,7 @@ module.exports = (sequelize) => {
     return new Promise((resolve, reject) => {
         const User = require('../models/User')(sequelize);
         const Role = require('../models/Role')(sequelize);
-        const UserRole = sequelize.define('users_roles', { }, { timestamps: false, underscored: true });
+        const UserRole = require('../models/UserRole')(sequelize);
 
         User.belongsToMany(Role, { through: UserRole });
         Role.belongsToMany(User, { through: UserRole });
